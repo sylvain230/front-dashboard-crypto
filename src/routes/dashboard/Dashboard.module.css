@@ -1,0 +1,40 @@
+/* src/routes/Dashboard.module.css */
+
+.dashboardLayout {
+  background-color: #1a1a1a; /* Un gris très foncé pour le fond de la page, plus neutre */
+}
+
+.dashboardHeader {
+  background-color: #1a1a1a; /* Le header a le même fond que le layout ou légèrement différent */
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #333; /* Une petite ligne de séparation subtile */
+}
+
+.headerContent {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboardContent {
+  padding: 16px;
+}
+
+.mainColumn {
+  flex: 3 1 700px; /* Propriétés flex pour la colonne principale */
+}
+
+.actionMenuColumn {
+  flex: 1 1 300px; /* Propriétés flex pour la colonne du menu d'actions */
+}
+
+/* Vous pouvez ajouter des styles responsives ici si vous voulez, ex: */
+ @media (max-width: 768px) {
+  .mainColumn, .actionMenuColumn {
+    flex: 1 1 100%;
+  }
+} 
