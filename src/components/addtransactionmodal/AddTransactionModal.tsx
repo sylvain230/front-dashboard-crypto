@@ -1,4 +1,4 @@
-import { Button, DatePickerProps, Form, Modal } from "antd"
+import { Button, Form, Modal } from "antd"
 
 interface AddTransactionModalProps {
   open: boolean; // Prop pour contrôler l'ouverture/fermeture
@@ -26,12 +26,6 @@ const AddTransactionModal = ({ open, onClose, onFinish }: AddTransactionModalPro
         form.resetFields() // Réinitialise le formulaire si on annule
         onClose()
     }
-
-    const onDateChange: DatePickerProps['onChange'] = (date, dateString) => {
-
-    }
-
-
 
     return(
         <Modal
