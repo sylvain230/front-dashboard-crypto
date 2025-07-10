@@ -1,6 +1,4 @@
-import LabelValue from "@/interfaces/CodeLabelValue";
-
-export const mockedToken = new Promise<LabelValue[]>(resolve => resolve([
+export const mockedToken = Promise.resolve([
     {
         label: "Bitcoin",
         value: "BTC"
@@ -9,4 +7,4 @@ export const mockedToken = new Promise<LabelValue[]>(resolve => resolve([
         label: "Ethereum",
         value: "ETH"
     }
-]))
+])

@@ -3,15 +3,32 @@ import GlobalWalletChart from '@/components/globalwalletchart/GlobalWalletChart'
 import ActionMenu from '@/components/actionmenu/ActionMenu';
 import styles from '@/routes/dashboard/Dashboard.module.css';
 import CryptoHoldingsTable from '@/components/cryptoholdingstable/CryptoHoldingsTable';
+import { useState } from 'react';
+import AddTransactionModal from '@/components/addtransactionmodal/AddTransactionModal';
 
 const { Header, Content } = Layout;
 
 const Dashboard = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false); // État pour contrôler la visibilité de la modale
+
+    const handleAddTransactionClick = () => {
+        setIsModalOpen(true)
+    }
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false)
+    }
+
+    const handleFormSubmit = (values: any) => {
+        console.log("Ici on gère l'appel au backend avec les valeurs suivantes : ", values)
+        setIsModalOpen(false)
+    }
+
     return (
         <Layout className={styles.dashboardLayout}>
             <Header className={styles.dashboardHeader}>
                 <div className={styles.headerContent}>
-                { <ActionMenu /> }
+                { <ActionMenu onAddTransactionClick={handleAddTransactionClick} /> }
                 </div>
             </Header>
             <Content className={styles.dashboardContent}>
@@ -31,6 +48,13 @@ const Dashboard = () => {
                         <CryptoHoldingsTable />
                 </Row>
             </Content>
+
+            <AddTransactionModal
+                open={isModalOpen}
+                onClose={handleCloseModal}
+                onFinish={handleFormSubmit}
+            />
+
         </Layout>
     )
 }

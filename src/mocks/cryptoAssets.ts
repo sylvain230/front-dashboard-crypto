@@ -1,6 +1,4 @@
-import CryptoAsset from "@/interfaces/CryptoAsset";
-
-export const mockedCryptoAssets = new Promise<CryptoAsset[]>(resolve => (resolve([
+export const mockedCryptoAssets = Promise.resolve([
     {
         id: "btc",
         name: "Bitcoin",
@@ -9,4 +7,4 @@ export const mockedCryptoAssets = new Promise<CryptoAsset[]>(resolve => (resolve
         percentageOfPortfolio: 17,
         trend24h: -10
     }
-])))
+])

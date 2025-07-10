@@ -55,6 +55,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
               headerBg: '#212121', // Fond de l'en-tête de la carte (plus foncé que le corps)
               // cardPadding: '16px 24px', // Ex: pour ajuster le padding interne si nécessaire
             },
+            Button: {
+              borderRadius: 20
+            }
             // Vous pouvez aussi styliser les boutons ici si vous le souhaitez
             // Button: {
             //   // defaultBg: 'transparent',

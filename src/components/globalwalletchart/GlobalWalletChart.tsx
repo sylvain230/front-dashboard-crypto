@@ -26,7 +26,7 @@ const GlobalWalletChart = () => {
 
     return (
         <Card title="Graphique global du wallet dans le temps"  style={{ marginBottom: 24 }}>
-            <Flex justify="center" align="center" style={{ height: 250 }}> {/* Ajustez la hauteur ici si nécessaire */}
+            <Flex justify="center" align="center" style={{ height: 250, width: 500 }}> {/* Ajustez la hauteur ici si nécessaire */}
                 <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={data}>
                         <CartesianGrid stroke="#4a4a4a" strokeDasharray="3 3"/>

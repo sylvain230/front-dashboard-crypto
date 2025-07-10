@@ -1,16 +1,23 @@
 /* src/routes/Dashboard.module.css */
 
 .dashboardLayout {
-  background-color: #1a1a1a; /* Un gris très foncé pour le fond de la page, plus neutre */
+    min-height: 100vh; /* S'assure que le layout prend toute la hauteur */
+    display: flex; /* Rend le layout un conteneur flex */
+      flex-direction: column; /* Organise ses enfants (Header, Content, Footer) en colonne */
+    background-color: transparent; /* Permet de voir le fond derrière le layout */
+
+
 }
 
 .dashboardHeader {
-  background-color: #1a1a1a; /* Le header a le même fond que le layout ou légèrement différent */
-  padding: 0 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #333; /* Une petite ligne de séparation subtile */
+    flex-shrink: 0; /* Empêche le header de rétrécir */
+    background-color: #1a1a1a; /* Le header a le même fond que le layout ou légèrement différent */
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #333; /* Une petite ligne de séparation subtile */
+    border-radius: 10px;
 }
 
 .headerContent {
@@ -21,7 +28,11 @@
 }
 
 .dashboardContent {
-  padding: 16px;
+  flex-grow: 1; /* Permet au contenu de prendre tout l'espace restant */
+    overflow-y: auto; /* <<< AJOUTEZ CECI POUR LE DÉFILEMENT VERTICAL INTERNE >>> */
+      padding: 24px; /* Votre padding pour le contenu */
+
+
 }
 
 .mainColumn {
