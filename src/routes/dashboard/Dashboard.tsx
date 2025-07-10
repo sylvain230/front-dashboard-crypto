@@ -6,7 +6,7 @@ import CryptoHoldingsTable from '@/components/cryptoholdingstable/CryptoHoldings
 import { useState } from 'react';
 import AddTransactionModal from '@/components/addtransactionmodal/AddTransactionModal';
 
-const { Header, Content } = Layout;
+const { Header, Content } = Layout
 
 const Dashboard = () => {
     const [isModalOpen, setIsModalOpen] = useState(false); // État pour contrôler la visibilité de la modale
@@ -28,9 +28,10 @@ const Dashboard = () => {
         <Layout className={styles.dashboardLayout}>
             <Header className={styles.dashboardHeader}>
                 <div className={styles.headerContent}>
-                { <ActionMenu onAddTransactionClick={handleAddTransactionClick} /> }
+                    <ActionMenu onAddTransactionClick={handleAddTransactionClick} />
                 </div>
             </Header>
+
             <Content className={styles.dashboardContent}>
                 {/* Utilisation de Row/Col pour la disposition.
                     Le gutter={[24, 24]} ajoute un bon espacement.
@@ -54,7 +55,6 @@ const Dashboard = () => {
                 onClose={handleCloseModal}
                 onFinish={handleFormSubmit}
             />
-
         </Layout>
     )
 }
