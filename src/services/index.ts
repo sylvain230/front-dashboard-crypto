@@ -40,7 +40,7 @@ export const post = async(path: string, body: any) => {
   return await data.json()
 }
 
-export const get = async (path: string) => {
+export const get = async<TResponse> (path: string): Promise<TResponse> => {
   const url = encodeURI(`${path}`)
   const data = await fetch(url).then(response => {
     if (response.status >= 400 && response.status < 600) {

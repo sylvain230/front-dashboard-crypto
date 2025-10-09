@@ -10,16 +10,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.90.2",
+    "@tanstack/react-query-devtools": "^5.x.x",
     "antd": "^5.17.3",
+    "axios": "^1.12.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.23.1",
+    "react-hook-form": "^7.64.0",
+    "react-router-dom": "^7.9.3",
     "recharts": "^3.0.2",
-    "vite-plugin-eslint": "^1.8.1",
-    "@tanstack/react-query": "^5.x.x",
-    "@tanstack/react-query-devtools": "^5.x.x"
+    "vite-plugin-eslint": "^1.8.1"
   },
   "devDependencies": {
+    "@types/node": "^24.7.0",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.2.0",

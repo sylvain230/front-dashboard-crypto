@@ -13,6 +13,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    
+     /* Ajouter ou vérifier ces deux options */
+    "esModuleInterop": true,                /* Permet l'importation par défaut (default import) */
+    "allowSyntheticDefaultImports": true,   /* Permet au compilateur de créer des "faux" default imports lorsque ce n'est pas le cas */
+
 
     /* Linting */
     "strict": true,
@@ -20,8 +25,9 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
+    "baseUrl": "src", 
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["*"]
     }
   },
   

@@ -25,7 +25,7 @@ const CryptoHoldingsTable = () => {
 // Utilisation du hook useQuery de React Query pour récupérer les données
 const { data, isLoading, isError, error } = useQuery<CryptoAsset[], Error>({
     queryKey: ['cryptoAssets'], // Clé de la requête
-    queryFn: () => getAllCryptoAssets()
+    queryFn: () => getAllCryptoAssets(userId)
 });
 
 // Affichage du chargement

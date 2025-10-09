@@ -6,8 +6,10 @@ import eslint from "vite-plugin-eslint"
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react() && eslint()],
+  plugins: [react(), eslint()],
   resolve: {
-    alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }]
+    alias: {
+    '@': path.resolve(__dirname, './src'), 
+  },
   }
 })
