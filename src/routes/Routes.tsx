@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes as ReactRouterRoutes } from "react-router-dom"
 import ErrorPage from "./error/ErrorPage"
 import Dashboard from "@/routes/dashboard/Dashboard"
-import LoginPage from "./login/LoginPage"
+import LoginForm from "./login/LoginPage"
 import { ProtectedRoute } from "@/auth/ProtectedRoute"
 
 const Routes = () => {
@@ -11,7 +11,7 @@ const Routes = () => {
 
             {/* 1. Routes Publiques */}
             {/* Le login est accessible à tous. */}
-            <Route path="/login" element={<LoginPage />} errorElement={<ErrorPage />} />
+            <Route path="/login" element={<LoginForm />} errorElement={<ErrorPage />} />
 
             {/* 2. Groupe de Routes Protégées */}
             {/* Tous les éléments ENFANTS de cette Route seront affichés UNIQUEMENT si ProtectedRoute autorise l'accès. */}

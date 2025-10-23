@@ -1,13 +1,14 @@
 import { useQuery } from '@tanstack/react-query'; // Pour le fetching de données
-import { getHistory } from '@/services/history'; // Votre service API
 import { Card, Flex } from 'antd';
-import ChartDataPoint from '@/interfaces/ChartDataPoint'
 import { CartesianGrid, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis,Line } from 'recharts';
+import ChartDataPoint from '@/interfaces/ChartDataPoint';
+import { getPortfolioHistoryByUserId } from '@/services/transaction';
 
 const GlobalWalletChart = () => {
+    
     const { data, isLoading, error, isError } = useQuery<ChartDataPoint[], Error>({
-        queryKey: ['wallerHistory'],
-        queryFn: () => getHistory()
+        queryKey: ['walletHistory'], // On utilise l'ID pour isoler le cache utilisateur
+        queryFn: () => getPortfolioHistoryByUserId()
     });
 
     if (isLoading) {

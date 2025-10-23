@@ -12,7 +12,7 @@ export interface IAuthContext {
 }
 
 // 1. Création du contexte
-export const authContext = createContext<IAuthContext | undefined>(undefined); // Nous allons gérer le type plus tard
+export const authContext = createContext<IAuthContext | undefined>(undefined);
 
 // 2. Le composant Provider
 // On définit une interface de props vide si le composant n'attend pas d'autres props

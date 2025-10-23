@@ -1,9 +1,9 @@
 import LabelValue from "@/interfaces/CodeLabelValue"
 import CryptoAsset from "@/interfaces/CryptoAsset"
 import TokenInformation from "@/interfaces/TokenInformation"
-import { get } from "."
 import { mockedTokensInformations } from "@/mocks/tokenBodys"
 import { mockedToken } from "@/mocks/tokens"
+import { httpClient } from "@/api/httpClient"
 
 export const getTokens = async (): Promise<LabelValue[]> => {
      //return await get("https://api.coinpaprika.com/v1/tickers")
@@ -18,6 +18,7 @@ export const getInfosToken = async (token: string): Promise<TokenInformation> =>
  * Retourne la liste de tous les assets d'une personne. 
  * @returns { CryptoAsset[] } Une promise contenant le résumé du wallet.
  */
-export const getAllCryptoAssets = async (userId: string): Promise<CryptoAsset[]> => {
-    return await get<CryptoAsset[]>(`v1/resume/${userId}`)
+export const getAllCryptoAssets = async (): Promise<CryptoAsset[]> => {
+    const response = await httpClient.get(`v1/resume`, { withCredentials : true })
+    return response.data
 }
