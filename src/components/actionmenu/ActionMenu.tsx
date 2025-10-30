@@ -1,33 +1,23 @@
 import { Button, Space } from "antd"
-import { useNavigate } from "react-router-dom"
 import styles from "@/components/actionmenu/ActionMenu.module.css"
 
 interface MenuHautProps {
     onAddTransactionClick: () => void // Nouvelle prop pour le clic sur "Ajouter"
+    onShowTransactions: () => void
+    logout: () => void
 }
 
-const ActionMenu = ({ onAddTransactionClick }: MenuHautProps) => {
-    const navigate = useNavigate()
-
-    const handleConsulterWallet = () => {
-        navigate('/wallet-details')
-        console.log("Naviguer vers la page de consultation du wallet.")
-    }
-
-    const handleDeleteTransaction = () => {
-        console.log("Ouvrir une modale ou naviguer pour supprimer une transaction.")
-    }
-
+const ActionMenu = ({ onAddTransactionClick, onShowTransactions, logout }: MenuHautProps) => {
     return(
         <Space direction="horizontal" className={styles.actionMenuContainer}>
-            <Button type="primary" block onClick={handleConsulterWallet}>
-                Consulter Wallet
-            </Button>
-            <Button block onClick={onAddTransactionClick}>  {/* <<< UTILISEZ LA NOUVELLE PROP ICI */}
+            <Button onClick={onAddTransactionClick}>
                 Ajouter une transaction
             </Button>
-            <Button block danger onClick={handleDeleteTransaction}>
-                Supprimer une transaction
+            <Button  onClick={onShowTransactions}>
+                Afficher les transactions
+            </Button>
+            <Button onClick={logout}>
+                Se déconnecter
             </Button>
         </Space>
     )

@@ -1,30 +1,28 @@
 import { Button, DatePicker, Form, Input, Modal, Select } from "antd"
 import { useEffect } from "react";
 import dayjs from 'dayjs'; // N'oubliez pas d'installer dayjs: npm install dayjs
+import Transaction from "@/interfaces/Transaction";
+import { useAssetsOptions } from "@/hooks/useAssetsOptions";
 
 const { Option } = Select
-
-// Interface pour les données de la transaction
-interface TransactionFormData {
-    description: string
-    amount: number
-    type: 'income' | 'expense' | 'deposit' | 'withdrawal' | 'buy' | 'sell' | 'transfer'
-    date: string
-    category?: string // Optionnel
-    asset? : string // BTC, ETH, ...
-    curency?: string // USD, EUR, ...
-}
 
 interface AddTransactionModalProps {
   open: boolean; // Prop pour contrôler l'ouverture/fermeture
   onClose: () => void; // Fonction à appeler pour fermer la modale
   onFinish: (values: any) => void; // Fonction à appeler quand le formulaire est soumis
-  initialData?: Partial<TransactionFormData> // Pour pré-remplir le formulaire si nécessaire (ex: modification)
+  initialData?: Partial<Transaction> & { id?: string }; // Pour pré-remplir le formulaire si nécessaire (ex: modification)
   isLoading?: boolean;
 }
 
+
+
 const AddTransactionModal = ({ open, onClose, onFinish, initialData, isLoading }: AddTransactionModalProps) => {
+
+    const { options } = useAssetsOptions()
     const [form] = Form.useForm() // Hook pour contrôler le formulaire
+
+    // Détermine si on est en mode modification ou ajout
+    const isEditMode = !!initialData?.id;
 
     // Initialiser/réinitialiser le formulaire quand la modale s'ouvre ou que les données initiales changent
     useEffect(() => {
@@ -34,7 +32,9 @@ const AddTransactionModal = ({ open, onClose, onFinish, initialData, isLoading }
                 // Si des données initiales sont fournies, les mettre dans le formulaire
                 form.setFieldsValue({
                     ...initialData,
-                    date: initialData.date ? dayjs(initialData.date) : undefined, // Convertir la date en objet dayjs
+                    type: "buy",
+                    asset: initialData.token,
+                    date: initialData.dateTransaction ? dayjs(initialData.dateTransaction) : undefined, // Convertir la date en objet dayjs
                 })
             }
         }
@@ -46,7 +46,7 @@ const AddTransactionModal = ({ open, onClose, onFinish, initialData, isLoading }
             // Ici, vous pouvez ajuster les valeurs avant de les envoyer, par exemple formater la date
             const formattedValues = {
                 ...values,
-                date: values.date ? values.date.format('YYYY-MM-DD') : undefined
+                date: values.date ? values.date.toISOString() : undefined
             }
             onFinish(formattedValues) // Appelle la fonction onFinish passée en prop
             })
@@ -60,9 +60,13 @@ const AddTransactionModal = ({ open, onClose, onFinish, initialData, isLoading }
         onClose() // Ferme la modale
     }
 
+    const modalTitle = isEditMode ? "Modifier la transaction" : "Ajouter une nouvelle transaction";
+
+    const submitButtonText = isEditMode ? "Sauvegarder les modifications" : "Ajouter";
+
     return(
         <Modal
-            title="Ajouter une nouvelle transaction"            
+            title={modalTitle}        
             open={open}
             onOk={handleOk}
             onCancel={handleCancel}
@@ -76,7 +80,7 @@ const AddTransactionModal = ({ open, onClose, onFinish, initialData, isLoading }
                     loading={isLoading}
                     disabled={isLoading}
                 >
-                    Ajouter
+                    {submitButtonText}
                 </Button>
                 </>
             ]}
@@ -87,8 +91,14 @@ const AddTransactionModal = ({ open, onClose, onFinish, initialData, isLoading }
                 layout="vertical" // Pour que les labels soient au dessus des inputs
                 name="add_transaction_form"
                 onFinish={handleOk}
-                initialValues={{ type: 'expense'}} // Valeur par défaut pour le type de transaction
+                initialValues={initialData} // Valeur par défaut pour le type de transaction
                 >
+                    <Form.Item 
+                        name="id"
+                        style={{ display: 'none' }} // Rendre le champ invisible
+                    >
+                        <Input type="hidden" /> 
+                    </Form.Item>
                     <Form.Item
                         name="type"
                         label="Type de transaction"
@@ -106,7 +116,7 @@ const AddTransactionModal = ({ open, onClose, onFinish, initialData, isLoading }
                     </Form.Item>
 
                     <Form.Item name="asset" label="Actif (ex: BTC, ETH)">
-                        <Input placeholder="BTC, ETH, ..."/>
+                        <Select placeholder="BTC, ETH, ..." options={options}/>
                     </Form.Item>
 
                     <Form.Item name="amount" label="Montant">
@@ -114,18 +124,17 @@ const AddTransactionModal = ({ open, onClose, onFinish, initialData, isLoading }
                     </Form.Item>
 
                     <Form.Item name="currency" label="Devise (si applicable, ex: USD, EUR)">
-                    <Input placeholder="USD, EUR..." />
-                    </Form.Item>                    
+                        <Input placeholder="USD, EUR..." defaultValue="USD" />
+                    </Form.Item>
 
                     <Form.Item
                         name="date"
                         label="Date de la transaction"
                         rules={[{required: true, message: 'Veuillez sélectionner la date !'}]}>
-                        <DatePicker style={{width: '100%'}} format="YYYY-MM-DD"/>
+                        <DatePicker style={{width: '100%'}} format="DD-MM-YYYY"/>
                     </Form.Item>
                 
                 </Form>
-            Hello modal
         </Modal>
     )
 }

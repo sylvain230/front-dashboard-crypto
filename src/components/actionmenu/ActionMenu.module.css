@@ -1,3 +1,11 @@
 .actionmenuContainer {
     border-radius: 10px;
 }
+
+.headerContent {
+    /* Si vous voulez que les éléments se répartissent l'espace */
+    display: flex;
+    justify-content: space-between; /* Pour pousser les éléments aux bords si nécessaire */
+    align-items: center;
+    width: 100%; /* S'assurer que le conteneur prend toute la largeur */
+}

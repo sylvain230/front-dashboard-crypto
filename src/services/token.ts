@@ -4,6 +4,7 @@ import TokenInformation from "@/interfaces/TokenInformation"
 import { mockedTokensInformations } from "@/mocks/tokenBodys"
 import { mockedToken } from "@/mocks/tokens"
 import { httpClient } from "@/api/httpClient"
+import TokenMetadata from "@/interfaces/TokenMetadata"
 
 export const getTokens = async (): Promise<LabelValue[]> => {
      //return await get("https://api.coinpaprika.com/v1/tickers")
@@ -21,4 +22,8 @@ export const getInfosToken = async (token: string): Promise<TokenInformation> =>
 export const getAllCryptoAssets = async (): Promise<CryptoAsset[]> => {
     const response = await httpClient.get(`v1/resume`, { withCredentials : true })
     return response.data
+}
+
+export const getAllCoins =  async (): Promise<TokenMetadata[]> => {
+    return (await httpClient.get(`v1/tokens/all`, { withCredentials: true })).data
 }

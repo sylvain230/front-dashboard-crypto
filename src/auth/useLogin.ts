@@ -1,19 +1,7 @@
-import { httpClient } from "@/api/httpClient";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./useAuth";
-import Credentials from "@/interfaces/credentials/Credentials"; 
-
-
-// --- 1. Fonction de Mutation ---
-const loginUser = async (credentials: Credentials) => {
-    const { data } = await httpClient.post('/auth/login', credentials);
-
-    // Le backend enverra le JWT dans un cookie, donc la réponse JSON peut être vide
-    // ou contenir les informations de l'utilisateur (LoginResponse DTO).
-    return data;
-};
-
+import { loginUser } from "@/services/user";
 
 // --- 2. Hook Personnalisé ---
 export const useLogin = () => {
